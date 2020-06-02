@@ -6,7 +6,7 @@ There are 3 ways to use this package: semantic_infer (if you don't need data pac
 ### semantic_infer only
 semantic_infer takes a column name, an array of values and data type as input and returns an object if a match is found else returns 'None'
 
-Example usage:
+#### Example usage:
 const semantic_infer = require('./semantic_infer');
 var val_arr = ['V8r 1g7', 'V8X 5m2'];
 result2 = semanticinfer.semantically_classify_field('Post_CD',val_arr,'string',true);
@@ -31,7 +31,7 @@ Semantic inference rules:
 * Only resources with a "data" field will be sematically inferred.  
 * Providing a "SAVED_PATH_ATTR" attribute for data resources will result in the "data" field being replaced by a "path" field.
 
-Example usage:
+#### Example usage:
 const datapackageinfer = require('./datapackage_infer');
 const descriptor = {
   resources: [
@@ -77,6 +77,6 @@ Result:
 ### datapackage_infer_filesystem
 Infers data package (including semantic inference) json for all csv and txt files in the current directory and its sub-directories.  
 
-Example usage:
+#### Example usage:
 const datapackageinferfilesystem = require('./datapackage_infer_filesystem');
 datapackageinferfilesystem.infer_datapackage();
