@@ -74,3 +74,9 @@ Result:
   profile: 'data-package'
 }
 
+### datapackage_infer_filesystem
+Infers data package (including semantic inference) json for all csv and txt files in the current directory and its sub-directories.  
+
+Example usage:
+const datapackageinferfilesystem = require('./datapackage_infer_filesystem');
+datapackageinferfilesystem.infer_datapackage();
