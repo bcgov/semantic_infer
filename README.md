@@ -8,9 +8,9 @@ semantic_infer takes a column name, an array of values and data type as input an
 
 #### Example usage:	
 ~~~~
-const semantic_infer = require('./semantic_infer');
+const semanticinfer = require('semantic_infer');
 var val_arr = ['V8r 1g7', 'V8X 5m2'];
-result2 = semanticinfer.semantically_classify_field('Post_CD',val_arr,'string',true);
+result2 = semanticinfer.semantic_infer.semantically_classify_field('Post_CD',val_arr,'string',true);
 console.log(result2);	
 ~~~~
 
@@ -37,7 +37,7 @@ Semantic inference rules:
 
 #### Example usage:	
 ~~~~
-const datapackageinfer = require('./datapackage_infer');
+const semanticinfer = require('semantic_infer');
 const descriptor = {
   resources: [
   {
@@ -51,7 +51,11 @@ const descriptor = {
     }
   ]
 }
-const results = datapackageinfer.infer_datapackage(descriptor,true);	
+const results = semanticinfer.datapackage_infer.infer_datapackage(descriptor,true);
+results.then(function(result) {
+	console.log(result);
+	console.log(result.resources[0].schema.fields);
+}); 
 ~~~~
 ##### Result:	
 ~~~~
@@ -85,6 +89,6 @@ Infers data package (including semantic inference) json for all csv and txt file
 
 #### Example usage:	
 ~~~~
-const datapackageinferfilesystem = require('./datapackage_infer_filesystem');
-datapackageinferfilesystem.infer_datapackage();	
+const semanticinfer = require('./datapackage_infer_filesystem');
+semanticinfer.datapackage_infer_filesystem.infer_datapackage_filesystem();	
 ~~~~

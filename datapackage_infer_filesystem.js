@@ -1,12 +1,12 @@
 const {Package} = require('datapackage');
 
 module.exports = {
-	infer_datapackage: function() {
-		return infer_datapackage();
+	datapackage_infer_filesystem: async function() {
+		return datapackage_infer_filesystem();
 	}
 };
 
-const infer_datapackage = async () => {
+const datapackage_infer_filesystem = async () => {
 	
 	const dataPackage = await Package.load();
 	const semanticinfer = require('./semantic_infer');
@@ -49,4 +49,3 @@ const infer_datapackage = async () => {
 	} catch(err){console.log('Error occurred: '); console.log(err.message); console.log(dataPackage.errors);}
 	
 } 
-infer_datapackage();

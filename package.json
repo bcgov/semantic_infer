@@ -1,9 +1,30 @@
 {
   "name": "semantic_infer",
-  "version": "1.0",
+  "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
     "anymatch": "^3.1.1",
     "datapackage": "^1.1.9"
-  }
+  },
+  "description": " Infers semantic types (e.g., postal code, gender, first name) of tabular data fields. Includes support for inferring Frictionless data packages json and incorporating semantic inference into the data package json.",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bcgov/semantic_infer.git"
+  },
+  "keywords": [
+    "semantic",
+    "infer",
+    "datapackage",
+    "frictionless"
+  ],
+  "author": "Paul Ripley",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bcgov/semantic_infer/issues"
+  },
+  "homepage": "https://github.com/bcgov/semantic_infer#readme"
 }
