@@ -1,12 +1,12 @@
 const {Package} = require('datapackage');
 
 module.exports = {
-	datapackage_infer_filesystem: async function() {
-		return datapackage_infer_filesystem();
+	datapackage_infer_filesystem: async function(dp_attrs) {
+		return datapackage_infer_filesystem(dp_attrs);
 	}
 };
 
-const datapackage_infer_filesystem = async () => {
+const datapackage_infer_filesystem = async (dp_attrs) => {
 	
 	const dataPackage = await Package.load();
 	const semanticinfer = require('./semantic_infer');
@@ -43,6 +43,11 @@ const datapackage_infer_filesystem = async () => {
 					}
 				}
 			}
+		}
+		if (typeof dp_attrs === 'object' && dp_attrs !== null ) {
+			Object.keys(dp_attrs).forEach((key) => {
+				dataPackage.descriptor[key] = dp_attrs[key];
+			})
 		}
 		dataPackage.commit();
 		console.log(JSON.stringify(dataPackage.descriptor, null, 4));
