@@ -53,35 +53,34 @@ const descriptor = {
 }
 const results = semanticinfer.datapackage_infer.infer_datapackage(descriptor,true);
 results.then(function(result) {
-	console.log(result);
-	console.log(result.resources[0].schema.fields);
+	JSON.stringify(result);
 }); 
 ~~~~
 ##### Result:	
 ~~~~
 {
-  resources: [
+  "resources": [
     {
-      name: 'example',
-      profile: 'tabular-data-resource',
-      encoding: 'utf-8',
-      schema: { fields [
-        { name: 'height', type: 'integer', format: 'default' },
-        { name: 'age', type: 'integer', format: 'default' },
+      "name": "example",
+      "profile": "tabular-data-resource",
+      "encoding": "utf-8",
+      "schema": { "fields": [
+        { "name": "height", "type": "integer", "format": "default" },
+        { "name": "age", "type": "integer", "format": "default" },
         {
-          name: 'name',
-          type: 'string',
-          format: 'default',
-          var_class: 'indirect_identifier',
-          rdfType: 'https://schema.org/postalCode'
+          "name": "name",
+          "type": "string",
+          "format": "default",
+          "var_class": "indirect_identifier",
+          "rdfType": "https://schema.org/postalCode"
         }
       ],
-      missingValues: [ "" ]
+      "missingValues": [ "" ]
       },
-      path: 'example.csv'
+      "path": "example.csv"
     }
   ],
-  profile: 'data-package'
+  "profile": "data-package"
 }
 ~~~~
 ### datapackage_infer_filesystem
@@ -91,4 +90,24 @@ Infers data package (including semantic inference) json for all csv and txt file
 ~~~~
 const semanticinfer = require('./datapackage_infer_filesystem');
 semanticinfer.datapackage_infer_filesystem.infer_datapackage_filesystem();	
+~~~~
+You may optional pass in an object to add to the data package as top level attributes of the data package. 
+~~~~
+const source = {"sources": [{
+  "title": "my source location",
+  "path": "path/to/my/datafile"
+}]}
+semanticinfer.datapackage_infer_filesystem.infer_datapackage_filesystem(source);
+~~~~
+##### Result:	
+~~~~
+{
+  "resources": [ ... ],
+  "profile": "data-package",
+  "sources": [{
+    "title": "my source location",
+    "path": "path/to/my/datafile"
+    }
+  ]
+} 
 ~~~~
