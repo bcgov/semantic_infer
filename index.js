@@ -1,3 +1,4 @@
+process.env.SUPPRESS_NO_CONFIG_WARNING = 'y';
 const semantic_infer = require('./semantic_infer');
 const datapackage_infer = require('./datapackage_infer');
 const datapackage_infer_filesystem = require('./datapackage_infer_filesystem');
