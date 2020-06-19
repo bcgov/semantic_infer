@@ -113,9 +113,9 @@ semanticinfer.datapackage_infer_filesystem.infer_datapackage_filesystem(source);
 } 
 ~~~~
 ### How to override default settings
-Create a config directory and a default.json file with the settings you wish to override.
-See settings.js for all the settings that can be overriden. Make sure you have a corresponding pattern for each label.  
-Example:
+Overriding the default settings are supported by the config npm module.  Create a "config" directory in your project folder and within that folder a "default.json" file with the settings you wish to override.
+See semantic_settings.js and datapackage_settings.js files for all the settings that can be overriden. Make sure you have a corresponding pattern for each label if you override semantic settings.  
+Example contents of default.json:
 ~~~~
 {
 "STRING_HEADER_SEMANTIC_LABELS":[
