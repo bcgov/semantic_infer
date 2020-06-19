@@ -4,8 +4,8 @@
   "main": "index.js",
   "dependencies": {
     "anymatch": "^3.1.1",
-    "datapackage": "^1.1.9",
-
+    "config": "^3.3.1",
+    "datapackage": "^1.1.9"
   },
   "description": " Infers semantic types (e.g., postal code, gender, first name) of tabular data fields. Includes support for inferring Frictionless data packages json and incorporating semantic inference into the data package json.",
   "devDependencies": {
@@ -13,7 +13,7 @@
     "mocha": "^8.0.1",
     "npmlog": "^4.1.2",
     "rewire": "^5.0.0",
-    "sinon": "^9.0.2"  
+    "sinon": "^9.0.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

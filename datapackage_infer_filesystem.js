@@ -10,11 +10,11 @@ const datapackage_infer_filesystem = async (dp_attrs) => {
 	
 	const dataPackage = await Package.load();
 	const semanticinfer = require('./semantic_infer');
-	const constants = require('./constants');
-	const VAR_CLASS_ATTR = constants.VAR_CLASS_ATTR;
-	const RDF_ATTR = constants.RDF_ATTR;
-	const SAVED_PATH_ATTR = constants.SAVED_PATH_ATTR;
-	const DATA_PACKAGE_INFER_FILE_FILTER = constants.DATA_PACKAGE_INFER_FILE_FILTER;
+	const settings = require('./datapackage_settings');
+	const VAR_CLASS_ATTR = settings.VAR_CLASS_ATTR;
+	const RDF_ATTR = settings.RDF_ATTR;
+	const SAVED_PATH_ATTR = settings.SAVED_PATH_ATTR;
+	const DATA_PACKAGE_INFER_FILE_FILTER = settings.DATA_PACKAGE_INFER_FILE_FILTER;
 	var vals = [];
 	var fieldVals = [];
 	var resourceDataSample = [];

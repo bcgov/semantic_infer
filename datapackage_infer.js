@@ -10,10 +10,10 @@ const infer_datapackage = async (descriptor, strict=true) => {
 	
 	const dataPackage = await Package.load(descriptor);
 	const semanticinfer = require('./semantic_infer');
-	const constants = require('./constants');
-	const VAR_CLASS_ATTR = constants.VAR_CLASS_ATTR;
-	const RDF_ATTR = constants.RDF_ATTR;
-	const SAVED_PATH_ATTR = constants.SAVED_PATH_ATTR;
+	const settings = require('./datapackage_settings');
+	const VAR_CLASS_ATTR = settings.VAR_CLASS_ATTR;
+	const RDF_ATTR = settings.RDF_ATTR;
+	const SAVED_PATH_ATTR = settings.SAVED_PATH_ATTR;
 	var vals = [];
 	var fieldVals = [];
 	if (strict && !(dataPackage.valid)) {

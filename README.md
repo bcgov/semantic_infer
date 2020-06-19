@@ -3,6 +3,7 @@ npm module for inferring the semantic types of tabular data fields. Includes sup
 
 There are 3 ways to use this package: semantic_infer (if you don't need data packages), datapackage_infer (for browser client based data package and semantic inference), and datapackage_infer_filesytem (for file system based data package and semantic inference). 
 
+Starting with version 1.2.0 You can use a config file to override default values.
 ### semantic_infer only
 semantic_infer takes a column name, an array of values and data type as input and returns an object if a match is found else returns 'None'
 
@@ -110,4 +111,34 @@ semanticinfer.datapackage_infer_filesystem.infer_datapackage_filesystem(source);
     }
   ]
 } 
+~~~~
+### How to override default settings
+Create a config directory and a default.json file with the settings you wish to override.
+See settings.js for all the settings that can be overriden. Make sure you have a corresponding pattern for each label.  
+Example:
+~~~~
+{
+"STRING_HEADER_SEMANTIC_LABELS":[
+	{"name":"Phone number","rdfType":"https://schema.org/telephone","var_class":"direct_identifier"},
+	{"name":"First name","rdfType":"https://schema.org/givenName","var_class":"direct_identifier"},
+	{"name":"Last name","rdfType":"https://schema.org/familyName","var_class":"direct_identifier"},
+	{"name":"Middle name","rdfType":"https://schema.org/additionalName","var_class":"direct_identifier"},
+	{"name":"Full name","var_class":"direct_identifier"},
+	{"name":"Email","rdfType":"https://schema.org/email","var_class":"direct_identifier"},
+	{"name":"Postal code","rdfType":"https://schema.org/postalCode","var_class":"indirect_identifier"},
+	{"name":"Street address","rdfType":"https://schema.org/streetAddress","var_class":"direct_identifier"},
+	{"name":"Gender","rdfType":"https://schema.org/gender","var_class":"research_content"}
+	],
+	"STRING_HEADER_PATTERNS":[
+	"/.*PHONE.*|.*PH.?NUM.*/",
+	"/.*FI?R?ST.?NAME|.*NAME.*FI?R?ST.*|F.?NAME|.*GI?VE?N.?NAME|.*NAME.*GI?VE?N.*/i",
+	"/.*LA?ST.?NA?ME.*|.*NA?ME.?LA?ST.*|.*SU?RNA?ME.*|.*FAMILY.?NAME.*|.*NAME.*FAMILY.*/i",
+	"/.*MID(DLE)?.?NAME.*|.*NAME.?MID(DLE)?.*|PREF(FERRED)?.?NAME/i",
+	"/.*FULL.?NA?ME.*|.*NA?ME.*FULL.*/i",
+	"/.*EMAIL.*/i",
+	"/.*PO?STA?L.?CO?DE?.*|.*POST_CD.*/i",
+	"/.*ADDR.*|.*STREET.*/i",
+	"/.*SEX.*|.*GE?NDE?R.*/i"
+	]
+}
 ~~~~
