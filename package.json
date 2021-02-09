@@ -4,16 +4,18 @@
   "main": "index.js",
   "dependencies": {
     "anymatch": "^3.1.1",
-    "config": "^3.3.1",
-    "datapackage": "^1.1.9"
+    "axios": "^0.21.1",
+    "config": "^3.3.3",
+    "datapackage": "^1.1.10",
+    "tableschema": "^1.12.4"
   },
   "description": " Infers semantic types (e.g., postal code, gender, first name) of tabular data fields. Includes support for inferring Frictionless data packages json and incorporating semantic inference into the data package json.",
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^8.0.1",
+    "chai": "^4.3.0",
+    "mocha": "^8.2.1",
     "npmlog": "^4.1.2",
     "rewire": "^5.0.0",
-    "sinon": "^9.0.2"
+    "sinon": "^9.2.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
