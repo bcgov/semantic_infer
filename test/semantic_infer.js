@@ -5,21 +5,21 @@ var logger = require('npmlog');
 var rewire = require('rewire');
 var sinon = require('sinon');
 var semanticInferModule = rewire('../semantic_infer');
-const constants = require('../constants');
+const settings = require('../semantic_settings');
 
 describe('Semantic Infer', function() {
 
     let find_match, find_header_match_datatype, find_values_match_datatype, semantically_classify_field;
-    const INT_HEADER_PATTERNS = constants.INT_HEADER_PATTERNS;
-    const INT_HEADER_SEMANTIC_LABELS = constants.INT_HEADER_SEMANTIC_LABELS;
-    const STRING_HEADER_PATTERNS = constants.STRING_HEADER_PATTERNS;
-    const STRING_HEADER_SEMANTIC_LABELS = constants.STRING_HEADER_SEMANTIC_LABELS;
-	const DATE_HEADER_PATTERNS = constants.DATE_HEADER_PATTERNS;
-	const DATE_HEADER_SEMANTIC_LABELS = constants.DATE_HEADER_SEMANTIC_LABELS;
-	const INT_VALUE_SEMANTIC_LABELS = constants.INT_VALUE_SEMANTIC_LABELS;
-	const INT_VALUE_PATTERNS = constants.INT_VALUE_PATTERNS;
-	const STRING_VALUE_SEMANTIC_LABELS = constants.STRING_VALUE_SEMANTIC_LABELS;
-	const STRING_VALUE_PATTERNS = constants.STRING_VALUE_PATTERNS;
+    const INT_HEADER_PATTERNS = settings.INT_HEADER_PATTERNS;
+    const INT_HEADER_SEMANTIC_LABELS = settings.INT_HEADER_SEMANTIC_LABELS;
+    const STRING_HEADER_PATTERNS = settings.STRING_HEADER_PATTERNS;
+    const STRING_HEADER_SEMANTIC_LABELS = settings.STRING_HEADER_SEMANTIC_LABELS;
+	const DATE_HEADER_PATTERNS = settings.DATE_HEADER_PATTERNS;
+	const DATE_HEADER_SEMANTIC_LABELS = settings.DATE_HEADER_SEMANTIC_LABELS;
+	const INT_VALUE_SEMANTIC_LABELS = settings.INT_VALUE_SEMANTIC_LABELS;
+	const INT_VALUE_PATTERNS = settings.INT_VALUE_PATTERNS;
+	const STRING_VALUE_SEMANTIC_LABELS = settings.STRING_VALUE_SEMANTIC_LABELS;
+	const STRING_VALUE_PATTERNS = settings.STRING_VALUE_PATTERNS;
 	
     describe('find_match function', function () {
 

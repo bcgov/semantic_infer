@@ -16,18 +16,30 @@ const datapackage_infer_filesystem = async (dp_attrs) => {
 	const SAVED_PATH_ATTR = settings.SAVED_PATH_ATTR;
 	const DATA_PACKAGE_INFER_FILE_FILTER = settings.DATA_PACKAGE_INFER_FILE_FILTER;
 	const DATA_PACKAGE_FILE_READ_SAMPLE_SIZE = settings.DATA_PACKAGE_FILE_READ_SAMPLE_SIZE;
+	const DATA_PACKAGE_FILE_RECORD_NUM_RECORDS = settings.DATA_PACKAGE_FILE_RECORD_NUM_RECORDS;
+	const NUM_RECORD_ATTR = settings.NUM_RECORD_ATTR;
+	const util = require('util');
+	const exec = util.promisify(require('child_process').exec);
 	var vals = [];
 	var fieldVals = [];
 	var resourceDataSample = [];
 	var i;
 	var s;
 	var resource;
+	async function csvRecordCount(fileLocation) {
+		const { stdout } = await exec(`cat ${fileLocation} | wc -l`);
+		return parseInt(stdout)-1; //assume there is a header row
+	};
+
 	try {
 		await dataPackage.infer(DATA_PACKAGE_INFER_FILE_FILTER);
 		for (r in dataPackage.descriptor.resources) {
 			resource = await dataPackage.resources[r];
 			//check for semantic inference only if files are identified as being tabular
 			if (resource.tabular) {
+				if (DATA_PACKAGE_FILE_RECORD_NUM_RECORDS == 1) {
+					dataPackage.descriptor.resources[r][NUM_RECORD_ATTR] = await csvRecordCount(resource.descriptor.path);
+				}
 				resourceDataSample = await resource.read({keyed:true,limit:DATA_PACKAGE_FILE_READ_SAMPLE_SIZE});
 				for (f in resource.schema.fields){
 					field = resource.schema.fields[f];

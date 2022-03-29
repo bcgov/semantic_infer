@@ -1,6 +1,8 @@
 # semantic_infer
 npm module for inferring the semantic types of tabular data fields. Includes support for inferring Frictionless data packages json and incorporating semantic inference into the data package json.
 
+https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md
+
 There are 3 ways to use this package: semantic_infer (if you don't need data packages), datapackage_infer (for browser client based data package and semantic inference), and datapackage_infer_filesytem (for file system based data package and semantic inference). 
 
 Starting with version 1.2.0 You can use a config file to override default values.
@@ -112,7 +114,7 @@ semanticinfer.datapackage_infer_filesystem.infer_datapackage_filesystem(source);
   ]
 } 
 ~~~~
-### How to override default settings
+#### How to override default settings
 Overriding the default settings are supported by the config npm module.  Create a "config" directory in your project folder and within that folder a "default.json" file with the settings you wish to override.
 See semantic_settings.js and datapackage_settings.js files for all the settings that can be overriden. Make sure you have a corresponding pattern for each label if you override semantic settings.  
 Example contents of default.json:
@@ -142,3 +144,5 @@ Example contents of default.json:
 	]
 }
 ~~~~
+#### Optional calcuation of number of records in tabular resources
+You can optionally calculate the number of records in a CSV by setting DATA_PACKAGE_FILE_RECORD_NUM_RECORDS=1 in your config file.  Works only for linux environments.  

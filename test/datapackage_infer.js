@@ -5,16 +5,16 @@ var logger = require('npmlog');
 var rewire = require('rewire');
 var sinon = require('sinon');
 var datapackageInferModule = rewire('../datapackage_infer');
-const constants = require('../constants');
+const settings = require('../datapackage_settings');
 const semanticinfer = require('../semantic_infer');
 
 
 describe('Datapackage Infer', function() {
 
     let infer_datapackage, semantically_classify_field_stub;
-	const VAR_CLASS_ATTR = constants.VAR_CLASS_ATTR;
-	const RDF_ATTR = constants.RDF_ATTR;
-	const SAVED_PATH_ATTR = constants.SAVED_PATH_ATTR;
+	const VAR_CLASS_ATTR = settings.VAR_CLASS_ATTR;
+	const RDF_ATTR = settings.RDF_ATTR;
+	const SAVED_PATH_ATTR = settings.SAVED_PATH_ATTR;
 	
     describe('infer_datapackage', function () {
 		this.timeout(10000); 
