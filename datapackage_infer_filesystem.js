@@ -16,6 +16,7 @@ const datapackage_infer_filesystem = async (dp_attrs) => {
 	const SAVED_PATH_ATTR = settings.SAVED_PATH_ATTR;
 	const DATA_PACKAGE_INFER_FILE_FILTER = settings.DATA_PACKAGE_INFER_FILE_FILTER;
 	const DATA_PACKAGE_FILE_READ_SAMPLE_SIZE = settings.DATA_PACKAGE_FILE_READ_SAMPLE_SIZE;
+	const DATA_PACKAGE_FILE_RECORD_NUM_RECORDS = settings.DATA_PACKAGE_FILE_RECORD_NUM_RECORDS;
 	const DATA_PACKAGE_ADD_CSV_INFO = settings.DATA_PACKAGE_ADD_CSV_INFO;
 	const NUM_RECORD_ATTR = settings.NUM_RECORD_ATTR;
 	const NUM_LINES_ATTR = settings.NUM_LINES_ATTR;
@@ -65,14 +66,19 @@ const datapackage_infer_filesystem = async (dp_attrs) => {
 			resource = await dataPackage.resources[r];
 			//check for semantic inference only if files are identified as being tabular
 			if (resource.tabular) {
-				if (DATA_PACKAGE_ADD_CSV_INFO == 1) {
+				if (DATA_PACKAGE_ADD_CSV_INFO == 1 || DATA_PACKAGE_FILE_RECORD_NUM_RECORDS == 1) {
 					let info = await csvInfo(resource.descriptor.path);
-					dataPackage.descriptor.resources[r][BYTES_ATTR] = info.bytes;
-					dataPackage.descriptor.resources[r][NUM_COMMENT_LINES_ATTR] = info.comment_lines;
-					dataPackage.descriptor.resources[r][NUM_EMPTY_LINES_ATTR] = info.empty_lines;
-					dataPackage.descriptor.resources[r][NUM_INVALID_FIELD_LENGTH_ATTR] = info.invalid_field_length;
-					dataPackage.descriptor.resources[r][NUM_LINES_ATTR] = info.lines;
-					dataPackage.descriptor.resources[r][NUM_RECORD_ATTR] = info.records;
+					if (DATA_PACKAGE_FILE_RECORD_NUM_RECORDS == 1 && DATA_PACKAGE_ADD_CSV_INFO == 0) {
+						dataPackage.descriptor.resources[r][NUM_RECORD_ATTR] = info.records;
+					}
+					else {
+						dataPackage.descriptor.resources[r][BYTES_ATTR] = info.bytes;
+						dataPackage.descriptor.resources[r][NUM_COMMENT_LINES_ATTR] = info.comment_lines;
+						dataPackage.descriptor.resources[r][NUM_EMPTY_LINES_ATTR] = info.empty_lines;
+						dataPackage.descriptor.resources[r][NUM_INVALID_FIELD_LENGTH_ATTR] = info.invalid_field_length;
+						dataPackage.descriptor.resources[r][NUM_LINES_ATTR] = info.lines;
+						dataPackage.descriptor.resources[r][NUM_RECORD_ATTR] = info.records;
+					}
 				}
 				resourceDataSample = await resource.read({keyed:true,limit:DATA_PACKAGE_FILE_READ_SAMPLE_SIZE});
 				
