@@ -5,7 +5,7 @@ var logger = require('npmlog');
 var rewire = require('rewire');
 var sinon = require('sinon');
 var semanticInferModule = rewire('../semantic_infer');
-const settings = require('../semantic_settings');
+const settings = require('../semantic_settings')();
 
 describe('Semantic Infer', function() {
 

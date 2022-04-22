@@ -1,16 +1,17 @@
 const {Package} = require('datapackage');
 
 module.exports = {
-	infer_datapackage: function(descriptor, strict=true) {
-		return infer_datapackage(descriptor, strict);
+	infer_datapackage: function(descriptor, strict=true, options={}) {
+		return infer_datapackage(descriptor, strict, options);
 	}
 };
 
-const infer_datapackage = async (descriptor, strict=true) => {
+const infer_datapackage = async (descriptor, strict=true, options) => {
 	
 	const dataPackage = await Package.load(descriptor);
-	const semanticinfer = require('./semantic_infer');
-	const settings = require('./datapackage_settings');
+	const semantic_infer = require('./semantic_infer').semantic_infer;
+	const semanticinfer = new semantic_infer(options);
+	const settings = require('./datapackage_settings')(options);
 	const VAR_CLASS_ATTR = settings.VAR_CLASS_ATTR;
 	const RDF_ATTR = settings.RDF_ATTR;
 	const SAVED_PATH_ATTR = settings.SAVED_PATH_ATTR;

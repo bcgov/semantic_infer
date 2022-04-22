@@ -5,8 +5,9 @@ var logger = require('npmlog');
 var rewire = require('rewire');
 var sinon = require('sinon');
 var datapackageInferModule = rewire('../datapackage_infer');
-const settings = require('../datapackage_settings');
-const semanticinfer = require('../semantic_infer');
+const semantic_infer = require('../semantic_infer').semantic_infer;
+const semanticinfer = new semantic_infer();
+const settings = require('../datapackage_settings')();
 
 
 describe('Datapackage Infer', function() {
@@ -100,7 +101,7 @@ const descriptor3 = {
             infer_datapackage = datapackageInferModule.__get__('infer_datapackage');
             infer_datapackage = sinon.spy(infer_datapackage);
             datapackageInferModule.__set__('infer_datapackage', infer_datapackage);
-			semantically_classify_field_stub = sinon.stub(semanticinfer, 'semantically_classify_field');
+			semantically_classify_field_stub = sinon.stub(semantic_infer.prototype, 'semantically_classify_field');
         });
 
         it.only('should return the a data package without semantic fields when no semantic matches are found', async function() {
