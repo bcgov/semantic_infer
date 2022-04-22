@@ -1,4 +1,5 @@
-let config = require('config');
+let c = require('./config').config;
+const config = new c();
 
 module.exports = function(options){
 	function getParameterValue(param, defaultValue) {

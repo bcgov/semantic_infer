@@ -1,4 +1,5 @@
-let config = require('config');
+let c = require('./config').config;
+const config = new c();
 function regexFromString (string) {
   var match = /^\/(.*)\/([a-z]*)$/.exec(string)
   return new RegExp(match[1], match[2])
