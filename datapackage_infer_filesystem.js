@@ -25,6 +25,7 @@ const datapackage_infer_filesystem = async (dp_attrs, options) => {
 	const NUM_COMMENT_LINES_ATTR = settings.NUM_COMMENT_LINES_ATTR;
 	const NUM_INVALID_FIELD_LENGTH_ATTR = settings.NUM_INVALID_FIELD_LENGTH_ATTR;
 	const BYTES_ATTR = settings.BYTES_ATTR;
+	const DATA_PACKAGE_ADD_DELIMETER = settings.DATA_PACKAGE_ADD_DELIMETER;
 	var vals = [];
 	var fieldVals = [];
 	var resourceDataSample = [];
@@ -52,9 +53,8 @@ const datapackage_infer_filesystem = async (dp_attrs, options) => {
 		return delimEntries[0][0];
 	}
 	
-	async function csvInfo(fileLocation) {
-		const parser = parse({info: true, bom: true, delimiter: await detectDelimiter(fileLocation)});
-		var done = 0; 
+	async function csvInfo(fileLocation, delim) {
+		const parser = parse({info: true, bom: true, delimiter: delim});
 		fs.createReadStream(fileLocation)
 		.pipe(parser);
 		for await (const record of parser) {}
@@ -67,8 +67,10 @@ const datapackage_infer_filesystem = async (dp_attrs, options) => {
 			resource = await dataPackage.resources[r];
 			//check for semantic inference only if files are identified as being tabular
 			if (resource.tabular) {
+				let delimiter = await detectDelimiter(resource.descriptor.path);
+				
 				if (DATA_PACKAGE_ADD_CSV_INFO == 1 || DATA_PACKAGE_FILE_RECORD_NUM_RECORDS == 1) {
-					let info = await csvInfo(resource.descriptor.path);
+					let info = await csvInfo(resource.descriptor.path, delimiter);
 					if (DATA_PACKAGE_FILE_RECORD_NUM_RECORDS == 1 && DATA_PACKAGE_ADD_CSV_INFO == 0) {
 						dataPackage.descriptor.resources[r][NUM_RECORD_ATTR] = info.records;
 					}
@@ -80,6 +82,9 @@ const datapackage_infer_filesystem = async (dp_attrs, options) => {
 						dataPackage.descriptor.resources[r][NUM_LINES_ATTR] = info.lines;
 						dataPackage.descriptor.resources[r][NUM_RECORD_ATTR] = info.records;
 					}
+				}
+				if (DATA_PACKAGE_ADD_DELIMETER){
+					dataPackage.descriptor.resources[r]["dialect"] = {delimiter: delimiter};
 				}
 				resourceDataSample = await resource.read({keyed:true,limit:DATA_PACKAGE_FILE_READ_SAMPLE_SIZE});
 				
@@ -104,7 +109,6 @@ const datapackage_infer_filesystem = async (dp_attrs, options) => {
 				dataPackage.descriptor[key] = dp_attrs[key];
 			})
 		}
-		dataPackage.commit();
 		console.log(JSON.stringify(dataPackage.descriptor, null, 4));
 	} catch(err){console.log('Error occurred: '); console.log(err.message); console.log(dataPackage.errors);}
 	

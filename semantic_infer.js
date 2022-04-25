@@ -44,6 +44,7 @@ class semantic_infer {
 	find_values_match_datatype(vals, dt, debug = false) {
 		let i;
 		let max_val;
+		let max_key;
 		let result;
 		let result_arr = [];
 		let best_match_arr = [];

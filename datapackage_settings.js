@@ -18,6 +18,7 @@ module.exports = function(options){
 			NUM_EMPTY_LINES_ATTR: getParameterValue('NUM_EMPTY_LINES_ATTR','empty_lines'),
 			NUM_COMMENT_LINES_ATTR: getParameterValue('NUM_COMMENT_LINES_ATTR','comment_lines'),
 			NUM_INVALID_FIELD_LENGTH_ATTR: getParameterValue('NUM_INVALID_FIELD_LENGTH_ATTR','invalid_field_length'),
-			BYTES_ATTR: getParameterValue('BYTES_ATTR','bytes')
+			BYTES_ATTR: getParameterValue('BYTES_ATTR','bytes'),
+			DATA_PACKAGE_ADD_DELIMETER: getParameterValue('DATA_PACKAGE_ADD_DELIMETER',false),
 	}
 }
