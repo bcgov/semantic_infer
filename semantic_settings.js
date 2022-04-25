@@ -15,7 +15,7 @@ function arrayOfRegexes (arr) {
 module.exports = function(options){
 	function getParameterValue(param, defaultValue, isRegex=false) {
 		if (isRegex){
-			return (options && options[param]) ? regexFromString(options[param]) : config.has(param) ? arrayOfRegexes(config.get(param)) : defaultValue;	
+			return (options && options[param]) ? arrayOfRegexes(options[param]) : config.has(param) ? arrayOfRegexes(config.get(param)) : defaultValue;	
 		}
 		else {
 			return (options && options[param]) ? options[param] : config.has(param) ? config.get(param) : defaultValue;	
