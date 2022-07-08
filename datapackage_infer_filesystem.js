@@ -86,7 +86,7 @@ const datapackage_infer_filesystem = async (dp_attrs, options) => {
 				if (DATA_PACKAGE_ADD_DELIMETER){
 					dataPackage.descriptor.resources[r]["dialect"] = {delimiter: delimiter};
 				}
-				resourceDataSample = await resource.read({keyed:true,limit:DATA_PACKAGE_FILE_READ_SAMPLE_SIZE});
+				resourceDataSample = await resource.read({keyed:true,limit:DATA_PACKAGE_FILE_READ_SAMPLE_SIZE,cast:false});
 				
 				for (f in resource.schema.fields){
 					field = resource.schema.fields[f];

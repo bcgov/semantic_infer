@@ -37,7 +37,7 @@ const infer_datapackage = async (descriptor, strict=true, options) => {
 			res = dataPackage.getResource(resource.name);
 			await res.infer();
 			dataPackage.descriptor.resources[k] = res.descriptor;
-			vals = await res.read({keyed: true});
+			vals = await res.read({keyed:true,cast:false});
 			for (j = 0; j < res.descriptor.schema.fields.length; j++) {
 				field = res.descriptor.schema.fields[j];
 				fieldVals = [];
