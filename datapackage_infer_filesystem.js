@@ -54,7 +54,7 @@ const datapackage_infer_filesystem = async (dp_attrs, options) => {
 	}
 	
 	async function csvInfo(fileLocation, delim) {
-		const parser = parse({info: true, bom: true, delimiter: delim});
+		const parser = parse({info: true, bom: true, delimiter: delim, relax_column_count: true});
 		fs.createReadStream(fileLocation)
 		.pipe(parser);
 		for await (const record of parser) {}
